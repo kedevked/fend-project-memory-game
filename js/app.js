@@ -1,7 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
+let cards = [...document.getElementsByClassName('card')];
 
+let openCards = [...document.getElementsByClassName('match')];
 
 /*
  * Display the cards on the page
@@ -25,7 +27,20 @@ function shuffle(array) {
     return array;
 }
 
+//Event listener for a card
+cards.forEach(function(card){
+	card.addEventListener('click', flipCard);
+})
 
+function flipCard(){
+	if(!openCards.includes(this)){
+		openCards = [...openCards, this];
+		this.classList.add('match');
+	}else{
+		openCards.splice(openCards.indexOf(this), 1);
+		this.classList.remove('match');
+	}
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
