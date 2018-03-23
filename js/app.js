@@ -3,7 +3,8 @@
  */
 let cards = [...document.getElementsByClassName('card')];
 
-let openCards = [...document.getElementsByClassName('match')];
+let openCards = [...document.getElementsByClassName('match')]
+					.map(element => element.firstElementChild.className);
 
 /*
  * Display the cards on the page
@@ -33,12 +34,68 @@ cards.forEach(function(card){
 })
 
 function flipCard(){
-	if(!openCards.includes(this)){
-		openCards = [...openCards, this];
-		this.classList.add('match');
+	const cardClass = this.firstElementChild.className
+	openCards = [...openCards, cardClass];
+	this.classList.add('match');
+
+	if(openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()){
+		setTimeout(() => {
+			//iterate over the last two consecutives items
+			// console.log('openCards.length', openCards.length);
+			// console.log('openCards.indexOf(element)', openCards.indexOf(element));
+			// console.log('slice', openCards.slice(openCards.indexOf(element) -1, -1));
+			openCards.slice(openCards.indexOf(cardClass) -1, 2).forEach((element, index) => {
+				openCards.splice(openCards.indexOf(element), 1);
+				[...document.getElementsByClassName(element)].forEach((elt) => {
+					console.log('elt', elt);
+					elt.parentNode.classList.remove('match');
+				})
+				//console.log(this);
+				//this.classList.remove('match');
+			});
+		}, 500)
+	} /*else {
+		if (!matchCard()){
+			this.classList.add('match');
+			setTimeout(() => {
+				openCards.slice(-2).forEach((element) => {
+				openCards.splice(openCards.indexOf(this), 1);
+				[...document.getElementsByClassName(element)].forEach((elt) => {
+					console.log('elt', elt);
+					elt.parentNode.classList.remove('match');
+				})
+				//console.log(this);
+				//this.classList.remove('match');
+			});
+			}, 5000)
+		}
+	}
+*/
+
+	// if (!openCards.includes(this.firstElementChild.className)){
+	// }else {
+	// 	console.log(matchCard(this));
+	// 	if (!matchCard(this)){
+	// 		openCards.slice(-2).forEach((element) => {
+	// 			openCards.splice(openCards.indexOf(this), 1);
+	// 			[...document.getElementsByClassName(element)].forEach((elt) => {
+	// 				console.log('elt', elt);
+	// 				elt.parentNode.classList.remove('match');
+	// 			})
+	// 			//console.log(this);
+	// 			//this.classList.remove('match');
+	// 		});
+			
+	// 	}
+	// }
+}
+
+function matchCard(){
+	if(openCards[openCards.length-2] === 
+		openCards[openCards.length-1]){
+		return true;
 	}else{
-		openCards.splice(openCards.indexOf(this), 1);
-		this.classList.remove('match');
+		return false
 	}
 }
 /*
