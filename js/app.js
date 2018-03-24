@@ -44,7 +44,8 @@ function flipCard(){
 			// console.log('openCards.length', openCards.length);
 			// console.log('openCards.indexOf(element)', openCards.indexOf(element));
 			// console.log('slice', openCards.slice(openCards.indexOf(element) -1, -1));
-			openCards.slice(openCards.indexOf(cardClass) -1, 2).forEach((element, index) => {
+			const ind = openCards.indexOf(cardClass);
+			openCards.slice(ind -1, ind + 1).forEach((element, index) => {
 				openCards.splice(openCards.indexOf(element), 1);
 				[...document.getElementsByClassName(element)].forEach((elt) => {
 					console.log('elt', elt);
