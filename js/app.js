@@ -4,9 +4,26 @@
 let cards = [...document.getElementsByClassName('card')];
 let openCards = [...document.getElementsByClassName('match')]
 					.map(element => element.firstElementChild.className);
-let move = 0;
-displayStars(move);
+let move = null;
+init();
 
+function init() {
+	move = 0;
+	displayStars(move);
+}
+
+function restart() {
+	[...document.getElementsByClassName('match')].forEach(element => {
+		element.classList.remove('match');
+	});
+	[...document.getElementsByClassName('fa-star-o')].forEach(element => {
+		element.classList.remove('fa-star-o');
+		element.classList.add('fa-star');
+	})
+	init();
+}
+
+document.querySelector('.restart').addEventListener('click', restart)
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -71,6 +88,7 @@ function displayMoveCounter(){
 }
 
 function displayStars(move) {
+	console.log('move', move);
 	if (move === 0 || move === 10 || move === 30) {
 		let star = document.querySelector('.fa-star');
 		star.classList.remove('fa-star');
