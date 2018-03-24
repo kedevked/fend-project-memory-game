@@ -2,9 +2,10 @@
  * Create a list that holds all of your cards
  */
 let cards = [...document.getElementsByClassName('card')];
-
 let openCards = [...document.getElementsByClassName('match')]
 					.map(element => element.firstElementChild.className);
+let move = 0;
+displayStars(move);
 
 /*
  * Display the cards on the page
@@ -29,21 +30,20 @@ function shuffle(array) {
 }
 
 //Event listener for a card
-cards.forEach(function(card){
+cards.forEach(function(card) {
 	card.addEventListener('click', flipCard);
 })
+//Event listener for moves
 
-function flipCard(){
-	const cardClass = this.firstElementChild.className
+function flipCard() {
+	displayMoveCounter()
+	const cardClass = this.firstElementChild.className;
 	openCards = [...openCards, cardClass];
 	this.classList.add('match');
 
 	if(openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()){
 		setTimeout(() => {
 			//iterate over the last two consecutives items
-			// console.log('openCards.length', openCards.length);
-			// console.log('openCards.indexOf(element)', openCards.indexOf(element));
-			// console.log('slice', openCards.slice(openCards.indexOf(element) -1, -1));
 			const ind = openCards.indexOf(cardClass);
 			openCards.slice(ind -1, ind + 1).forEach((element, index) => {
 				openCards.splice(openCards.indexOf(element), 1);
@@ -51,52 +51,30 @@ function flipCard(){
 					console.log('elt', elt);
 					elt.parentNode.classList.remove('match');
 				})
-				//console.log(this);
-				//this.classList.remove('match');
 			});
 		}, 500)
-	} /*else {
-		if (!matchCard()){
-			this.classList.add('match');
-			setTimeout(() => {
-				openCards.slice(-2).forEach((element) => {
-				openCards.splice(openCards.indexOf(this), 1);
-				[...document.getElementsByClassName(element)].forEach((elt) => {
-					console.log('elt', elt);
-					elt.parentNode.classList.remove('match');
-				})
-				//console.log(this);
-				//this.classList.remove('match');
-			});
-			}, 5000)
-		}
 	}
-*/
-
-	// if (!openCards.includes(this.firstElementChild.className)){
-	// }else {
-	// 	console.log(matchCard(this));
-	// 	if (!matchCard(this)){
-	// 		openCards.slice(-2).forEach((element) => {
-	// 			openCards.splice(openCards.indexOf(this), 1);
-	// 			[...document.getElementsByClassName(element)].forEach((elt) => {
-	// 				console.log('elt', elt);
-	// 				elt.parentNode.classList.remove('match');
-	// 			})
-	// 			//console.log(this);
-	// 			//this.classList.remove('match');
-	// 		});
-			
-	// 	}
-	// }
 }
 
-function matchCard(){
+function matchCard() {
 	if(openCards[openCards.length-2] === 
 		openCards[openCards.length-1]){
 		return true;
 	}else{
 		return false
+	}
+}
+
+function displayMoveCounter(){
+	document.querySelector('.moves').textContent = ++move;
+	displayStars(move);
+}
+
+function displayStars(move) {
+	if (move === 0 || move === 10 || move === 30) {
+		let star = document.querySelector('.fa-star');
+		star.classList.remove('fa-star');
+		star.classList.add('fa-star-o');
 	}
 }
 /*
