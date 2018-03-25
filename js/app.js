@@ -10,6 +10,7 @@ init();
 function init() {
 	move = 0;
 	displayStars(move);
+	changeCardOrder();
 }
 
 function restart() {
@@ -32,6 +33,16 @@ document.querySelector('.restart').addEventListener('click', restart)
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+function changeCardOrder() {
+	cards = shuffle(cards);
+	const deck = document.querySelector('.deck');
+	const card = document.querySelector('.card');
+	while (deck.firstChild) {
+	    deck.removeChild(deck.firstChild);
+	}
+	cards.forEach(card => deck.appendChild(card));
+}
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -91,8 +102,7 @@ function matchCard() {
 		if (openCards.length === cards.length) {
 			document.querySelector('.wrap-hide').classList.remove('wrap-hide');
 		}
-		return true;
-		
+		return true;		
 	} else {
 		return false;
 	}
@@ -105,7 +115,7 @@ function displayMoveCounter(){
 
 function displayStars(move) {
 	console.log('move', move);
-	if (move === 0 || move === 10 || move === 30) {
+	if (move === 0 || move === 17 || move === 34) {
 		let star = document.querySelector('.fa-star');
 		star.classList.remove('fa-star');
 		star.classList.add('fa-star-o');
