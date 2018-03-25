@@ -9,13 +9,14 @@ init();
 
 function init() {
 	move = 0;
+	document.querySelector('.moves').textContent = 0;
 	displayStars(move);
 	changeCardOrder();
 }
 
 function restart() {
-	[...document.getElementsByClassName('match')].forEach(element => {
-		element.classList.remove('match');
+	[...document.getElementsByClassName('card')].forEach(element => {
+		element.className = 'card';
 	});
 	[...document.getElementsByClassName('fa-star-o')].forEach(element => {
 		element.classList.remove('fa-star-o');
@@ -115,8 +116,7 @@ function displayMoveCounter(){
 }
 
 function displayStars(move) {
-	console.log('move', move);
-	if (move === 0 || move === 17 || move === 34) {
+	if (move === 17 || move === 34 || move === 51) {
 		let star = document.querySelector('.fa-star');
 		star.classList.remove('fa-star');
 		star.classList.add('fa-star-o');
