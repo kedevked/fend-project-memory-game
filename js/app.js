@@ -38,7 +38,7 @@ function shuffle(array) {
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
+     	   temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
@@ -51,26 +51,38 @@ cards.forEach(function(card) {
 	card.addEventListener('click', flipCard);
 })
 //Event listener for moves
-
+let previous = null;
 function flipCard() {
-	displayMoveCounter()
-	const cardClass = this.firstElementChild.className;
-	openCards = [...openCards, cardClass];
-	this.classList.add('match');
+	if(previous !== this.firstElementChild || !this.classList.contains('open')){
+		displayMoveCounter()
+		const cardClass = this.firstElementChild.className;
+		openCards = [...openCards, cardClass];
 
-	if(openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()){
-		setTimeout(() => {
-			//iterate over the last two consecutives items
-			const ind = openCards.indexOf(cardClass);
-			openCards.slice(ind -1, ind + 1).forEach((element, index) => {
-				openCards.splice(openCards.indexOf(element), 1);
-				[...document.getElementsByClassName(element)].forEach((elt) => {
-					console.log('elt', elt);
-					elt.parentNode.classList.remove('match');
-				})
-			});
-		}, 500)
+		if(openCards.length % 2 === 1){
+			this.classList.add('open', 'show');
+		}else{
+			this.classList.add('match');
+			let open = document.querySelector('.open');
+			open.classList.remove('open', 'show');
+			open.classList.add('match');
+		}
+
+		if(openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()){
+			setTimeout(() => {
+				//iterate over the last two consecutives items
+				const ind = openCards.indexOf(cardClass);
+				openCards.slice(ind -1, ind + 1).forEach((element, index) => {
+					openCards.splice(openCards.indexOf(element), 1);
+					[...document.getElementsByClassName(element)].forEach((elt) => {
+						console.log('elt', elt);
+						elt.parentNode.classList.remove('match');
+					})
+				});
+			}, 500)
+		}
+		previous = this.firstElementChild;
 	}
+	
 }
 
 function matchCard() {
