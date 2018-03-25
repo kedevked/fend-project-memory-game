@@ -60,14 +60,14 @@ function flipCard() {
 
 		if(openCards.length % 2 === 1){
 			this.classList.add('open', 'show');
-		}else{
+		} else {
 			this.classList.add('match');
 			let open = document.querySelector('.open');
 			open.classList.remove('open', 'show');
 			open.classList.add('match');
 		}
 
-		if(openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()){
+		if (openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()) {
 			setTimeout(() => {
 				//iterate over the last two consecutives items
 				const ind = openCards.indexOf(cardClass);
@@ -88,9 +88,13 @@ function flipCard() {
 function matchCard() {
 	if(openCards[openCards.length-2] === 
 		openCards[openCards.length-1]){
+		if (openCards.length === cards.length) {
+			document.querySelector('.wrap-hide').classList.remove('wrap-hide');
+		}
 		return true;
-	}else{
-		return false
+		
+	} else {
+		return false;
 	}
 }
 
