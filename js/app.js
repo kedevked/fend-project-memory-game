@@ -21,12 +21,17 @@ function restart() {
 	[...document.getElementsByClassName('fa-star-o')].forEach(element => {
 		element.classList.remove('fa-star-o');
 		element.classList.add('fa-star');
-	})
+	});
+	[...document.getElementsByClassName('icon-hide')].forEach(element => {
+		element.classList.remove('icon-hide');
+	});
+	openCards = [];
 	init();
 	document.querySelector('.wrap').classList.add('wrap-hide');
 }
 
 document.querySelector('.restart').addEventListener('click', restart);
+document.querySelector('.button-restart').addEventListener('click', restart);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function changeCardOrder() {
@@ -111,10 +116,12 @@ function displayMoveCounter(){
 }
 
 function displayStars(move) {
-	if (move === 17 || move === 34 || move === 51) {
-		let star = document.querySelector('.fa-star');
+	if (move === 17 || move === 34 ) {
+		const stars = document.querySelectorAll('.fa-star');
+		let star = stars[stars.length - 1];
 		star.classList.remove('fa-star');
 		star.classList.add('fa-star-o');
+		document.querySelector('.icon-align').classList.add('icon-hide');
 	}
 }
 
