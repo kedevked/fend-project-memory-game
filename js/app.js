@@ -66,7 +66,8 @@ cards.forEach(function(card) {
 //Event listener for moves
 let previous = null;
 function flipCard() {
-	if(previous !== this.firstElementChild || !this.classList.contains('open')){
+	if((previous !== this.firstElementChild || openCards.length %2 ===0) && 
+		(!this.classList.contains('open') && !this.classList.contains('match'))) {
 		displayMoveCounter()
 		const cardClass = this.firstElementChild.className;
 		openCards = [...openCards, cardClass];
