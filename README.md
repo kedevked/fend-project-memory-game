@@ -17,6 +17,9 @@ At the beginning all the cards are hidden.
 
 At any time, one can cancel the game and restart by clicking on the restart icon.
 
+## Dependencies
+[Moment.js](https://momentjs.com/)
+
 
 ## Contributing
 
