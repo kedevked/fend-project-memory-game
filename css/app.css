@@ -112,7 +112,7 @@ h1 {
 * Styles for congratulation
 */
 
-.wrap{
+.wrap {
     top: 0;
     transform: translate(0,50%);
     margin: 20px auto;
@@ -126,20 +126,20 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
 }
-.wrap img{
+.wrap img {
     border-radius: 50%;
     clip: rect(0px,200px,190px,0px);    
 }
-.wrap h2{
-    margin-top: 30px;
+.wrap h2 {
+    margin-top: 6px;
 }
-.wrap h3{
+.wrap h3 {
     text-align: center;
-    margin: 24px auto;
+    margin: 8px auto;
     width: 365px;
     opacity: 0.6;
 }
-.wrap button{
+.wrap button {
     height: 45px;
     width: 175px;
     border-radius: 100px;
@@ -149,7 +149,7 @@ h1 {
     color: #eee;    
     opacity: 1;
 }
-button:hover{
+button:hover {
     opacity: 0.9;
     cursor: pointer;
 }
@@ -170,9 +170,13 @@ button:hover{
     border-radius: 100px;
     line-height: 0.5em
 }
-.icon-align{
+.icon-align {
     vertical-align: text-bottom;
 }
-.icon-hide{
+.icon-hide {
     display: none;
+}
+.timer {
+    display: inline-block;
+    margin-left: 2.5em;
 }
