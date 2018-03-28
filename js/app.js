@@ -22,6 +22,7 @@
  }
 
  function restart() {
+ 	stopTimer(); // will stop the timer if necessary.
  	[...document.getElementsByClassName('card')].forEach(element => {
  		element.className = 'card';
  	});
@@ -35,6 +36,7 @@
  	openCards = [];
  	init();
  	document.querySelector('.wrap').classList.add('wrap-hide');
+ 	displayTimer();
  }
 
  document.querySelector('.restart').addEventListener('click', restart);
@@ -77,8 +79,7 @@ function startTimer(){
 	if (!time) {
 		timeId = window.setInterval(function(){
 			time++;
-			document.querySelector('.timer').textContent = 
-			moment(new Date(null).setSeconds(time)).format('mm:ss');
+			displayTimer();
 		}, 1000);
 	}
 }
@@ -88,7 +89,13 @@ function stopTimer() {
 	clearInterval(timeId);
 }
 
+function displayTimer() {
+	document.querySelector('.timer').textContent = 
+			moment(new Date(null).setSeconds(time)).format('mm:ss');
+}
+
 function flipCard() {
+	displayTimer();
 	startTimer();
 	if((previous !== this.firstElementChild || openCards.length %2 ===0) && 
 		(!this.classList.contains('open') && !this.classList.contains('match'))) {
