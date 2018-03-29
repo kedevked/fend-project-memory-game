@@ -99,7 +99,6 @@ function flipCard() {
 	startTimer();
 	if((previous !== this.firstElementChild || openCards.length %2 ===0) && 
 		(!this.classList.contains('open') && !this.classList.contains('match'))) {
-		displayMoveCounter()
 	const cardClass = this.firstElementChild.className;
 	openCards = [...openCards, cardClass];
 
@@ -110,6 +109,7 @@ function flipCard() {
 		let open = document.querySelector('.open');
 		open.classList.remove('open', 'show');
 		open.classList.add('match');
+		displayMoveCounter();
 	}
 
 	if (openCards.length > 1 && openCards.length % 2 === 0 && !matchCard()) {
